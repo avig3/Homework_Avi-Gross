@@ -1,0 +1,70 @@
+Question 1
+
+a. In relational database model the data is organized in tables consisting of rows and columns. 
+Each row contains a single record comprised of individual data elements organized in columns containing elements of the same kind according to the rules defined for that column. 
+SQL is a language used to create, modify and get data from the database.
+
+b. A schema is a collection of database objects. 
+Schema objects are logical structures created by users. 
+So far we learned about table objects, so with this kind of objects there are specific columns in each table and there is a characteristic for each column such as primary key, not null etc.
+
+Question 2
+
+a. SQL is a language used to create, modify and get data from the database.
+SQLite is a software library that implements a serverless, zero-configuration, transactional SQL database engine.  
+b. SQL is used to pull, insert, delete data from the relational database.
+c. A NOT NULL constraint in SQL is used to prevent inserting NULL values into the specified column.
+
+Question 3
+a.
+This will create a table called "CARS", this table will have the following columns:
+ID - all values will be an integer number
+Model - all values will be a text and can not be empty (null) value
+BRAND - all values will be a text and can not be empty (null) value, also each value is unique (cannot apear again in another row)
+YEAR - all values will be a integer number and can not be empty (null) value
+PRICE - all value defined as real (numeric data with a decimal component)
+
+b. This will insert a new row into the "CUSTOMERS" table:
+ID will 4, FULLNAME will be "Oren Klein", PHONE_NUMBER will be '039865178' and NATIONAL_ID will be 05216884651
+
+c. This will pull the values ROUTE and ARRIVAL_TIME from the BUSSES table only for the entriess where the COMPANY equals 'EGGED'
+
+d. This will delete from table PRODUCTS all the rows where the TYPE is equal 'Sock' and the SIZE is greater than 45
+
+Question 4
+
+a. The statement mentioned a name of table that doesn't exist in that database
+b. You get a UNIQUE constraint failed error when the data that you are inserting has an entry which is already in the corresponding column of the table that you are inserting into and the column is defined as UNIQUE.
+
+Question 5
+a.
+UPDATE BUSSES
+SET DESTINATION = HOLON
+WHERE COMPANY = 'Eged';
+b.
+DROP TABLE PRODUCTS
+c.
+SELECT BRAND,MODEL,COLOR FROM CARS ORDER BY AMOUNT DESC
+d.
+DELETE FROM BEVERAGES WHERE VOL=(SELECT MAX(VOL) FROM BEVERAGES);
+e.
+
+SELECT DESTINATION, DATE, MODEL 
+FROM AIRPLANES INNER JOIN 
+FLIGHTS ON AIRPLANES.ID=FLIGHTS.AIRPLANE_ID LIMIT 10;
+
+f.
+CREATE TABLE "FOOTBALL_CLUB1" (
+	"ID"	INTEGER NOT NULL,
+	"NAME"	TEXT NOT NULL UNIQUE,
+	PRIMARY KEY("ID")
+);
+
+INSERT INTO FOOTBALL_CLUB1 SELECT * FROM FOOTBALL_CLUB;
+SELECT FOOTBALL_CLUB.NAME AS TEAM1, FOOTBALL_CLUB1.NAME AS TEAM2 FROM FOOTBALL_CLUB JOIN FOOTBALL_CLUB1 WHERE FOOTBALL_CLUB1.ID>FOOTBALL_CLUB.ID
+ 
+
+
+
+
+
