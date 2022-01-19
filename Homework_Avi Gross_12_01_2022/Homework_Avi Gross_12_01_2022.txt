@@ -1,0 +1,97 @@
+Question 1
+
+import sqlite3
+conn = sqlite3.connect(r'C:\Users\user\Documents\temp_DB.db')
+
+
+while True:
+    NAME=input('NAME:')
+    if NAME.isalpha():
+        if NAME[0].islower():
+            NAME=NAME[0].upper()+NAME[1:]
+            print(f'Changed first character to upper case, new name is {NAME}')
+        break
+while True:
+    ADDRESS = input('ADDRESS:')
+    if ADDRESS.isalpha():
+        break
+while True:
+    AGE=input('AGE:')
+    if AGE.isdigit():
+        AGE=int(AGE)
+        if AGE>17 and AGE<68:
+            break
+while True:
+    SALARY = input('SALARY:')
+    if SALARY.isdigit():
+        break
+
+def AddNewWorker():
+    conn.execute(f"INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY) VALUES ('{NAME}', {AGE}, '{ADDRESS}', {SALARY});")
+    conn.commit()
+    print(conn.execute("SELECT * FROM COMPANY ORDER BY ID DESC LIMIT 1").fetchone())
+
+AddNewWorker()
+
+
+
+Question 2
+
+def col_vector():
+    column = input('Enter column name to check duplicates:')
+    cursor = conn.execute(f"SELECT {column} FROM COMPANY")
+    for record in cursor:
+        col_list.append(record[0])
+    return col_list
+
+def checkIfDuplicates(elem_list):
+    for elem in elem_list:
+        if elem_list.count(elem) > 1:
+            return elem
+
+import sqlite3
+conn = sqlite3.connect(r'C:\Users\user\Documents\temp_DB.db')
+col_list=[]
+dup_vector=[]
+col_vector()
+dup_item=checkIfDuplicates(col_list)
+for i in range(len(col_list)):
+    if col_list[i] == dup_item:
+        col_vector = dup_vector.append(i+1)
+
+IDs = conn.execute("SELECT * FROM COMPANY")
+for i in IDs:
+    if i[0] in dup_vector:
+        print(i)
+to_keep=int(input("enter ID to keep:"))
+to_keep_index=dup_vector.index(to_keep)
+dup_vector.pop(to_keep_index)
+for i in dup_vector:
+    conn.execute(f"DELETE FROM COMPANY WHERE ID={i}")
+    conn.commit()
+
+Question 3
+
+NAME = input('NAME:')
+AGE = int(input('AGE:'))
+ADDRESS = input('ADDRESS:')
+SALARY = int(input('SALARY:'))
+
+import sqlite3
+conn = sqlite3.connect(r'C:\Users\user\Documents\temp_DB.db')
+cursor = conn.execute(f"SELECT * FROM COMPANY;")
+
+for dup in cursor:
+    if dup[1] == NAME:
+        print('This is a duplicate record to:')
+        print(dup)
+        confirmation = input('Do you confirm updating the record (Y/N):')
+        if confirmation == 'Y':
+            conn.execute(f"UPDATE COMPANY SET AGE = {AGE}, ADDRESS = '{ADDRESS}', SALARY = {SALARY} WHERE NAME='{NAME}';")
+            conn.commit()
+            exit()
+        else:
+            exit()
+
+conn.execute(f"INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY) VALUES ('{NAME}', {AGE}, '{ADDRESS}', {SALARY});")
+conn.commit()
